@@ -1,5 +1,8 @@
 FROM bentolor/docker-dind-awscli
 
+WORKDIR /usr/app
+COPY ./ /usr/app
+
 RUN apk --update-cache add \
         nodejs-current \
         npm \
