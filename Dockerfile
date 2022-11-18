@@ -14,6 +14,7 @@ RUN apk --update-cache add \
         nodejs-current \
         npm \
         jq \
+        gnupg \
     && sed -i 's/ash/bash/g' /etc/passwd \
     && curl -sL https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub -o /etc/apk/keys/sgerrand.rsa.pub \
     && curl -sLO https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VER}/glibc-${GLIBC_VER}.apk \
@@ -25,6 +26,8 @@ RUN apk --update-cache add \
         glibc-bin-${GLIBC_VER}.apk \
         glibc-i18n-${GLIBC_VER}.apk \
     && curl -sL https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o awscliv2.zip \
+    && curl -sL https://github.com/mozilla/sops/releases/download/v3.7.3/sops-v3.7.3.linux -o /usr/local/bin/sops \
+    && chmod +x /usr/local/bin/sops \
     && /usr/glibc-compat/bin/localedef -i en_US -f UTF-8 en_US.UTF-8 \
     && apk del --purge glibc-i18n \
     && unzip -q awscliv2.zip \
@@ -47,6 +50,6 @@ RUN apk --update-cache add \
     && node -v \
     && jq --version \
     && npm install -g --save-dev esbuild@0 \
-    && npm i -g aws-cdk
+    && npm i -g aws-cdk 
 
 CMD /bin/bash
