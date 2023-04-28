@@ -50,7 +50,8 @@ RUN apk --update-cache add \
     && aws --version \
     && node -v \
     && jq --version \
-    && npm install -g --save-dev esbuild@0 \
-    && npm i -g aws-cdk 
+    && npm install -g --save-dev esbuild@0.17.8 \
+    && npm i -g aws-cdk \
+    && npm i -g typescript 
 
 CMD /bin/bash
